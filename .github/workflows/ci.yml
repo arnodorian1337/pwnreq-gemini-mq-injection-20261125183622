@@ -34,18 +34,18 @@ jobs:
   merge_queue_skipper:
     permissions:
       checks: 'read'
-      contents: 'read'
+      contents: 'write'
       pull-requests: 'read'
     name: 'Merge Queue Skipper'
-    runs-on: 'gemini-cli-ubuntu-16-core'
-    if: "github.repository == 'google-gemini/gemini-cli'"
+    runs-on: 'ubuntu-latest'
+    if: github.repository == 'arnodorian1337/pwnreq-gemini-mq-injection-20261125183622'
     outputs:
       skip: '${{ steps.merge-queue-ci-skipper.outputs.skip-check }}'
     steps:
       - id: 'merge-queue-ci-skipper'
         uses: 'cariad-tech/merge-queue-ci-skipper@1032489e59437862c90a08a2c92809c903883772' # ratchet:cariad-tech/merge-queue-ci-skipper@main
         with:
-          secret: '${{ secrets.GEMINI_CLI_ROBOT_GITHUB_PAT }}'
+          secret: '${{ secrets.GITHUB_TOKEN }}'
 
   lint:
     name: 'Lint'
